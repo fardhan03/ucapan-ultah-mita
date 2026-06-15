@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapbook Untuk Amrita Azkal Azkiya</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400;1,400&display=swap');
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #e8dcc4;
+            background-image: radial-gradient(#d5c8b5 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Lora', serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; color: #3e362e; overflow: hidden;
+            position: relative;
+        }
+
+        /* --- EFEK HUJAN LOVE --- */
+        .heart-rain {
+            position: absolute; top: -10%; color: #ff6b81;
+            font-size: 20px; user-select: none; z-index: 100;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* --- CONTAINER BUKU --- */
+        .book-container {
+            position: relative; width: 90%; max-width: 400px;
+            height: 85vh; background: #fffdf7; border-radius: 10px;
+            box-shadow: 15px 20px 40px rgba(0,0,0,0.2), inset 0 0 60px rgba(210,190,160,0.4);
+            overflow: hidden; border: 1px solid #d2c5b3; z-index: 10;
+        }
+
+        .page {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 30px 20px; box-sizing: border-box; opacity: 0;
+            visibility: hidden; transition: 0.8s; transform: scale(0.95);
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .page.active { opacity: 1; visibility: visible; transform: scale(1); }
+
+        /* Pojok Kanan Atas - Emoji Lucu */
+        .corner-emoji {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 1.5em; opacity: 0.7;
+        }
+
+        /* --- POLAROID & SELOTIP --- */
+        .polaroid {
+            background: white; padding: 10px 10px 35px 10px;
+            box-shadow: 3px 5px 15px rgba(0,0,0,0.2); position: relative;
+            margin: 15px 0; width: 85%; border: 1px solid #eaeaea;
+        }
+        .polaroid::before {
+            content: ''; position: absolute; top: -12px; left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 90px; height: 25px; background-color: rgba(220, 200, 170, 0.8);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); z-index: 2;
+        }
+        .polaroid img { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+        /* --- TEXT STYLES --- */
+        .handwriting { font-family: 'Caveat', cursive; font-size: 1.8em; text-align: center; color: #4a3f35; margin: 10px 0; font-weight: bold; }
+        .text-content { font-size: 0.95em; line-height: 1.5; text-align: center; padding: 0 10px; color: #554a3d; }
+        
+        .tilt-left { transform: rotate(-3deg); }
+        .tilt-right { transform: rotate(3deg); }
+
+        .nav-buttons { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 40px; }
+        .btn-nav { background: #8c7361; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.2em; display: flex; justify-content: center; align-items: center; }
+        .btn-start { background: #8c7361; color: white; border: none; padding: 12px 30px; border-radius: 25px; margin-top: 40px; cursor: pointer; font-family: 'Lora'; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="audio/lagu-kita.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="book-container">
+        <div class="page active" id="page0">
+            <h1 class="handwriting" style="font-size: 3.5em; margin-top: 80px;">Hi Love🎀</h1>
+            <p class="text-content">Ada pesan kecil dari aku di dalam buku ini.</p>
+            <button class="btn-start" onclick="startScrapbook()">Buka Lembaran ✨</button>
+        </div>
+
+        <div class="page" id="page1">
+            <span class="corner-emoji">🧸</span>
+            <div class="polaroid tilt-left"><img src="foto/foto1.jpg"></div>
+            <p class="handwriting">Selamat Ulang Tahun Ke-23!</p>
+            <p class="text-content">Untuk wanita paling sabar yang aku kenal, Amrita Azkal Azkiya. Selamat bertambah usia, sayang.</p>
+        </div>
+
+        <div class="page" id="page2">
+            <span class="corner-emoji">🌷</span>
+            <div class="polaroid tilt-right"><img src="foto/foto2.jpg"></div>
+            <p class="handwriting">Maafin aku, ya?</p>
+            <p class="text-content">Aku tau kita lagi di fase yang nggak enak. Aku minta maaf buat semua ego aku. Hari ini, aku cuma mau liat kamu senyum lagi.</p>
+        </div>
+
+        <div class="page" id="page3">
+            <span class="corner-emoji">🎓</span>
+            <div class="polaroid tilt-left"><img src="foto/foto3.jpg"></div>
+            <p class="handwriting">Perjuangan Hebatmu..</p>
+            <p class="text-content">Aku masih inget gimana lelahnya kamu waktu sidang S1 kemarin. Kamu kuat banget, sayang. Kamu udah buktiin kalau kamu bisa naklukin tantangan sesulit itu.</p>
+        </div>
+
+        <div class="page" id="page4">
+            <span class="corner-emoji">💼</span>
+            <div class="polaroid tilt-right"><img src="foto/foto4.jpg"></div>
+            <p class="handwriting">Jangan Menyerah, Sayang!</p>
+            <p class="text-content">Aku tau belakangan ini kamu pusing cari kerja. Kamu sering ngerasa gagal, padahal nggak. Dunia cuma lagi minta kamu nunggu sebentar lagi.</p>
+        </div>
+
+        <div class="page" id="page5">
+            <span class="corner-emoji">✨</span>
+            <div class="polaroid tilt-left"><img src="foto/foto5.jpg"></div>
+            <p class="handwriting">Doaku Untukmu..</p>
+            <p class="text-content">Aku selalu berdoa semoga pintu rezeki kamu segera terbuka lebar. Perusahaan yang tepat bakal nemuin bakat hebat kamu. Semangat ya, Kamu pasti bisa jadi orang hebat!</p>
+        </div>
+
+        <div class="page" id="page6">
+            <span class="corner-emoji">💖</span>
+            <div class="polaroid tilt-right"><img src="foto/foto6.jpg"></div>
+            <p class="handwriting">Kamu Lebih Dari Cukup</p>
+            <p class="text-content">Jangan bandingin diri kamu sama orang lain. Proses setiap orang beda-beda. Kamu tetep Mita yang paling membanggakan buat aku.</p>
+        </div>
+
+        <div class="page" id="page7">
+            <span class="corner-emoji">☁️</span>
+            <div class="polaroid tilt-left"><img src="foto/foto7.jpg"></div>
+            <p class="handwriting">Teruslah Bersinar</p>
+            <p class="text-content">Semoga di umur 23 ini, kesehatan dan kebahagiaan selalu meluk kamu setiap hari. dan semoga apa yang kamu inginkan segara terwujudkan</p>
+        </div>
+
+        <div class="page" id="page8">
+            <span class="corner-emoji">🏡</span>
+            <div class="polaroid tilt-right"><img src="foto/foto8.jpg"></div>
+            <p class="handwriting">Aku Di Sini..</p>
+            <p class="text-content">Apapun yang terjadi, aku bakal tetep jadi orang yang paling depan buat dengerin keluhan kamu. Capeknya bagi ke aku aja, jangan ditanggung sendiri.</p>
+        </div>
+
+        <div class="page" id="page9">
+            <span class="corner-emoji">🥰</span>
+            <div class="polaroid tilt-left"><img src="foto/foto9.jpg"></div>
+            <p class="handwriting">I Love You, Sayang</p>
+            <p class="text-content">Perasaanku nggak berubah. Aku selalu sayang dan cinta sama kamu.Kamu tetep rumah buat aku. Selamat ulang tahun, wanita hebatku.</p>
+        </div>
+
+        <div class="page" id="page10">
+            <span class="corner-emoji">💌</span>
+            <div class="polaroid tilt-right"><img src="foto/foto10.jpg"></div>
+            <h1 class="handwriting" style="font-size: 3em; margin-top: 50px;">- Fardhan -</h1>
+            <p class="text-content">Teruslah bertahan sampai selamanya sama aku ya love.</p>
+        </div>
+
+        <div class="nav-buttons" id="navButtons" style="display: none;">
+            <button class="btn-nav" onclick="changePage(-1)">←</button>
+            <button class="btn-nav" onclick="changePage(1)">→</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 10;
+        const bgMusic = document.getElementById('bgMusic');
+        const navButtons = document.getElementById('navButtons');
+
+        function startScrapbook() {
+            bgMusic.play();
+            document.getElementById('page0').classList.remove('active');
+            currentPage = 1;
+            document.getElementById('page' + currentPage).classList.add('active');
+            navButtons.style.display = 'flex';
+            setInterval(createHeart, 300); // Mulai hujan love
+        }
+
+        function changePage(direction) {
+            document.getElementById('page' + currentPage).classList.remove('active');
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            document.getElementById('page' + currentPage).classList.add('active');
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-rain');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+    </script>
+</body>
+</html>
